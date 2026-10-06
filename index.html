@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard PJU Pintar IoT</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome untuk ikon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ================= FORM LOGIN ================= -->
+  <div id="login-screen" class="container">
+    <div class="card login-card">
+      <h2><i class="fa-solid fa-lightbulb"></i> Login Admin PJU</h2>
+      <p>Masukkkan akun administrator untuk mengakses dashboard.</p>
+      <form id="login-form">
+        <div class="form-group">
+          <label>Email Admin</label>
+          <input type="email" id="login-email" placeholder="admin@pju.local" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Masuk System</button>
+        <p id="login-error" class="error-msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= DASHBOARD UTAMA ================= -->
+  <div id="dashboard-screen" class="container hidden">
+    <!-- Header -->
+    <header class="header">
+      <div>
+        <h1><i class="fa-solid fa-city"></i> Monitoring & Control PJU Pintar</h1>
+        <span class="badge" id="pju-node-id">Node: PJU_001</span>
+      </div>
+      <button id="logout-btn" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </header>
+
+    <!-- Banner Peringatan Kerusakan -->
+    <div id="alert-banner" class="alert alert-danger hidden">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <strong>PERINGATAN KERUSAKAN:</strong> Lampu PJU terdeteksi putus atau driver mengalami kerusakan!
+    </div>
+
+    <!-- Grid Kartu Telemetri -->
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-icon text-warning"><i class="fa-solid fa-sun"></i></div>
+        <div class="card-info">
+          <h3>Intensitas Cahaya</h3>
+          <p class="value"><span id="val-lux">0</span> <small>Lux</small></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon text-info"><i class="fa-solid fa-bolt"></i></div>
+        <div class="card-info">
+          <h3>Tegangan (PLN)</h3>
+          <p class="value"><span id="val-voltage">0</span> <small>V</small></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon text-success"><i class="fa-solid fa-wave-square"></i></div>
+        <div class="card-info">
+          <h3>Arus Listrik</h3>
+          <p class="value"><span id="val-current">0</span> <small>A</small></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon text-primary"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="card-info">
+          <h3>Daya Terpakai</h3>
+          <p class="value"><span id="val-power">0</span> <small>W</small></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Status dan Kontrol -->
+    <div class="grid-controls">
+      <!-- Status Kesehatan & Relay -->
+      <div class="card">
+        <h3><i class="fa-solid fa-heart-pulse"></i> Status Lampu & Relay</h3>
+        <hr>
+        <div class="status-row">
+          <span>Status Relay Saat Ini:</span>
+          <span id="badge-relay" class="status-badge bg-secondary">OFF</span>
+        </div>
+        <div class="status-row">
+          <span>Kesehatan Lampu:</span>
+          <span id="badge-health" class="status-badge bg-success">NORMAL</span>
+        </div>
+      </div>
+
+      <!-- Panel Kendali Jarak Jauh -->
+      <div class="card">
+        <h3><i class="fa-solid fa-sliders"></i> Remote Control</h3>
+        <hr>
+        <div class="control-group">
+          <label>Mode Operasional:</label>
+          <div class="btn-group">
+            <button id="btn-mode-auto" class="btn btn-outline">Otomatis (Sensor)</button>
+            <button id="btn-mode-manual" class="btn btn-outline">Manual (Override)</button>
+          </div>
+        </div>
+
+        <div class="control-group" id="manual-control-section">
+          <label>Saklar Lampu (Mode Manual):</label>
+          <div class="btn-group">
+            <button id="btn-lamp-on" class="btn btn-success">Paksa ON</button>
+            <button id="btn-lamp-off" class="btn btn-danger">Paksa OFF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Memuat Script JS -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+
